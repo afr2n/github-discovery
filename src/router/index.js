@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import ChallegeView from "../views/viewChallenge.vue";
 import LoginView from "../views/login.vue";
 import SignupView from "../views/signup.vue";
 import MyAccountView from "../views/Account.vue";
@@ -31,11 +30,6 @@ const routes = [
     path: "/discovery",
     name: "discovery",
     component: Discovery,
-  },
-  {
-    path: "/challenge",
-    name: "challenge",
-    component: ChallegeView,
   },
 ];
 

@@ -2,8 +2,8 @@
   <div class="headerClass">
     <div class="container-fluid custom-container-width py-4">
       <div class="d-flex justify-content-between">
-        <div class="d-flex flex-row align-items-center mx-2">
-          <h3 class="my-0 mx-2" id="app-title">GITHUB DISCOVERY</h3>
+        <div class="d-flex flex-row align-items-center">
+          <h3 class="my-0" id="app-title">GITHUB DISCOVERY</h3>
           <router-link to="/discovery">
             <CustomButton
               :isDisabled="false"
@@ -11,6 +11,7 @@
               :isIcon="false"
               :isActive="$route.path === '/discovery'"
               buttonText="Discovery"
+              extraClass="ml-4"
             />
           </router-link>
         </div>
@@ -24,13 +25,6 @@
               buttonText="Username"
             />
           </router-link>
-          <!-- <CustomButton
-            :isDisabled="false"
-            :onButtonClick="uploadTranscriptions"
-            :isIcon="true"
-            :isActive="true"
-            :iconUrl="require('@/assets-for-challenge/star-regular.svg')"
-          /> -->
           <router-link to="/login">
             <CustomButton
               :isDisabled="false"
@@ -77,5 +71,8 @@ export default {
 h3 {
   font-family: "Montserrat-Medium";
   font-size: 18px;
+}
+.headerClass {
+  background-color: #f6f7f8;
 }
 </style>

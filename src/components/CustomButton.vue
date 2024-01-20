@@ -26,7 +26,7 @@
         <div v-if="buttonType === 'secondary'" :class="{ 'active-secondary-button': isActive }" class="secondary-button">
             {{ buttonText }}
         </div>
-        <div v-if="buttonType === 'solid'" class="solid-button">
+        <div v-else-if="buttonType === 'solid'" class="solid-button">
             <span>{{ buttonText }}</span>
         </div>
         <div v-else>
