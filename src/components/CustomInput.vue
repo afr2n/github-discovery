@@ -3,7 +3,7 @@
 <template>
   <div>
     <div class="row mt-3">
-      <label class="col-12 text-left" :for="name">{{ label }}</label>
+      <label class="col-12 text-left" :for="name">{{ label }}{{required? "*" : ""}} </label>
     </div>
     <div class="row">
       <div class="col-12 input-container">

@@ -1,12 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view />
 </template>
 
 <style>
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: local("Montserrat-Medium"),
+    url(./assets-for-challenge/fonts/Montserrat-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: local("OpenSans-Regular"),
+    url(./assets-for-challenge/fonts/OpenSans-Regular.ttf) format("truetype");
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

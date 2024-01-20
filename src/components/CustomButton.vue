@@ -93,8 +93,9 @@ export default {
 
 <style scoped>
 .cusBtn {
-  font-family: "Montserrat-Medium";
+  font-family: "OpenSans-Regular";
   font-size: 14px;
+  font-weight: bold;
 }
 .active-primary-button {
   padding-bottom: 2px;

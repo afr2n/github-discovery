@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import ChallegeView from "../views/viewChallenge.vue";
 import LoginView from "../views/login.vue";
 import SignupView from "../views/signup.vue";
+import MyAccountView from "../views/Account.vue";
+import Discovery from "../views/Discovery.vue";
 
 const routes = [
   {
@@ -21,8 +23,18 @@ const routes = [
     component: SignupView,
   },
   {
+    path: "/account",
+    name: "account",
+    component: MyAccountView,
+  },
+  {
     path: "/discovery",
     name: "discovery",
+    component: Discovery,
+  },
+  {
+    path: "/challenge",
+    name: "challenge",
     component: ChallegeView,
   },
 ];
