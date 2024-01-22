@@ -5,6 +5,7 @@
       <CustomButton
         v-for="item in toggleTopics"
         :key="item.key"
+        :id="item.key"
         :isDisabled="false"
         :onButtonClick="() => loadGithubRepos(item.key)"
         :isIcon="false"

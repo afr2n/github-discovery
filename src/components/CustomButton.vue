@@ -8,6 +8,7 @@
       isIcon ? ' icon__button ' : ''
     } ${extraClass} `"
     @click="onButtonClick"
+    :id="id"
   >
     <div v-if="!buttonLoading">
       <div
@@ -50,6 +51,10 @@ export default {
       required: true,
     },
     buttonText: {
+      type: String,
+      required: true,
+    },
+    id: {
       type: String,
       required: true,
     },

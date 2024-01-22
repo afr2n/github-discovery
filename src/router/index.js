@@ -4,7 +4,7 @@ import LoginView from "../views/login.vue";
 import SignupView from "../views/signup.vue";
 import MyAccountView from "../views/Account.vue";
 import Discovery from "../views/Discovery.vue";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 const routes = [
   {
     path: "/",
@@ -44,9 +44,22 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      getAuth(),
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    );
+  });
+};
+
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (getAuth().currentUser) {
+    if (await getCurrentUser()) {
       next();
     } else {
       next("/login");

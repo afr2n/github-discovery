@@ -11,6 +11,7 @@
               :isActive="$route.path === '/discovery'"
               buttonText="Discovery"
               extraClass="ml-4"
+              id="discovery"
             />
           </router-link>
         </div>
@@ -21,6 +22,7 @@
               :isIcon="false"
               :isActive="$route.path === '/account'"
               :buttonText="username"
+              id="userAccname"
             />
           </router-link>
           <CustomButton
@@ -28,6 +30,7 @@
             :isIcon="false"
             :onButtonClick="logoutUser"
             buttonText="Logout"
+            id="logout"
           />
         </div>
       </div>
