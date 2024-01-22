@@ -28,19 +28,12 @@ import "vue-toast-notification/dist/theme-sugar.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import store from "../store";
 
-const redirectToLoginView = () => {
-  window.history.pushState(null, null, "/discovery");
-};
-
 export default {
   data() {
     return {
       email: "",
       password: "",
     };
-  },
-  props: {
-    router: Object,
   },
   components: { CustomInput, CustomButton },
   methods: {
@@ -53,10 +46,12 @@ export default {
             if (userData) {
               userData["username"] = userData.email.split("@")[0];
               store.commit("updateUserData", userData);
-              redirectToLoginView();
+              console.log("this.$router", this.$router);
+              this.$router.push("/discovery");
             }
           })
           .catch((error) => {
+            console.log("error", error);
             let errorMsg = "An error occurred while signing in.";
             switch (error.code) {
               case "auth/invalid-credential":
