@@ -67,7 +67,6 @@ export default {
       }
     },
     logoutUser() {
-      console.log("logoutUser");
       signOut(getAuth()).then(() => {
         window.location.href = "/login";
       });

@@ -44,12 +44,6 @@ export default {
   components: { CustomInput, CustomButton },
   methods: {
     submitForm() {
-      console.log(
-        "Logging in with:",
-        this.email,
-        this.password,
-        this.repeatPassword
-      );
       if (this.password && this.password === this.repeatPassword) {
         createUserWithEmailAndPassword(
           getAuth(),

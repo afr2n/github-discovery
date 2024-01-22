@@ -45,11 +45,9 @@ export default {
   components: { CustomInput, CustomButton },
   methods: {
     submitForm() {
-      console.log("Logging in with:", this.email, this.password);
       if (this.password && this.email) {
         signInWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((data) => {
-            console.log("data", data);
             const userData = JSON.parse(JSON.stringify(data.user));
             this.showSuccessToast("Successfully Logged In!");
             if (userData) {
@@ -60,7 +58,6 @@ export default {
           })
           .catch((error) => {
             let errorMsg = "An error occurred while signing in.";
-            console.log("error.code", error.code);
             switch (error.code) {
               case "auth/invalid-credential":
                 errorMsg = "Email or password incorrect";

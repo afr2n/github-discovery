@@ -37,7 +37,6 @@
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import ToggleTopics from "@/components/ToggleTopics.vue";
 import ItemList from "@/components/ItemList.vue";
-import store from "../store";
 import { mapGetters } from "vuex";
 
 export default {
@@ -52,14 +51,6 @@ export default {
       resultRepositories: "getResultRepositories",
       bookmarkedRepos: "getBookmarkedRepositories",
     }),
-  },
-  methods: {
-    addTranscriptionRow() {
-      store.dispatch("addNewRowToTranscriptionsAction");
-    },
-    searchInputChanged(value) {
-      this.searchText = value;
-    },
   },
 };
 </script>

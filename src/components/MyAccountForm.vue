@@ -38,8 +38,6 @@ export default {
     if (userDataObj.username) {
       this.username = userDataObj.username;
     }
-    console.log("this.email", this.email);
-    console.log("this.username", this.username);
   },
   watch: {
     userData: {
@@ -66,7 +64,6 @@ export default {
   components: { CustomInput, CustomButton },
   methods: {
     submitForm() {
-      console.log("new data", this.username, this.email);
       let userData = JSON.parse(JSON.stringify(this.userData));
       userData["email"] = this.email;
       userData["username"] = this.username;

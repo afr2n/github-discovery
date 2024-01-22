@@ -77,28 +77,6 @@ const myModule = {
     },
   },
   actions: {
-    fetchTranscriptionsAction({ commit }) {
-      api
-        .get(api.data_source_url)
-        .then((data) => {
-          const validJsonString = data.replace(
-            /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
-            '"$2":'
-          );
-          let editToDataArr = JSON.parse(validJsonString);
-          editToDataArr = editToDataArr.map((item, index) => {
-            if (index !== editToDataArr.length) {
-              item["isEdit"] = false;
-            }
-            return item;
-          });
-          commit("updateTranscriptions", editToDataArr);
-          commit("updateCurrentLoadingButton", ``);
-        })
-        .catch((e) => {
-          console.log("ERROR", e);
-        });
-    },
     fetchGithubReposForTopic({ commit, state }, payload) {
       const urlToFetch = api.getDataSourceUrl(payload.language, payload.sort);
       const language = payload.language;
@@ -138,7 +116,6 @@ const myModule = {
             ...item,
             selected: selectedTopics.includes(item.key),
           }));
-          console.log("updatedArray", sortedResult);
           commit("updateToggleTopics", updatedArray);
           commit("updateGithubRepoResults", sortedResult);
         })
@@ -167,7 +144,6 @@ const myModule = {
       } else {
         newBookmarked.push(payload.item);
       }
-      console.log("newBookmarked", newBookmarked);
       commit("updateBookmarkedRepo", newBookmarked);
     },
   },

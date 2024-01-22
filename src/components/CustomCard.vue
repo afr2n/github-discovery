@@ -100,8 +100,6 @@ export default {
   word-wrap: break-word;
   background-color: #f6f7f8;
   background-clip: border-box;
-  /* background: url("@/assets-for-challenge/repo.png") 0 0 no-repeat;
-  background-size: 300px 150px; */
   -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
   -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
