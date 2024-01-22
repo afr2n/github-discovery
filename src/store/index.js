@@ -6,15 +6,41 @@ const myModule = {
   state: {
     currentLoadingButton: ``,
     toggleTopics: [
-      { key: "vue", label: "Vue", selected: false, sortNum: 0 },
-      { key: "typescript", label: "Typescript", selected: false, sortNum: 1 },
-      { key: "javascript", label: "Javascript", selected: false, sortNum: 2 },
-      { key: "go", label: "GO", selected: false, sortNum: 3 },
-      { key: "css", label: "CSS", selected: false, sortNum: 4 },
-      { key: "node", label: "Node", selected: false, sortNum: 5 },
+      {
+        key: "vue",
+        label: "Vue",
+        selected: false,
+        sortNum: 0,
+      },
+      {
+        key: "typescript",
+        label: "Typescript",
+        selected: false,
+        sortNum: 1,
+      },
+      {
+        key: "javascript",
+        label: "Javascript",
+        selected: false,
+        sortNum: 2,
+      },
+      { key: "go", label: "GO", selected: false, sortNum: 3, sortBy: "stars" },
+      {
+        key: "css",
+        label: "CSS",
+        selected: false,
+        sortNum: 4,
+      },
+      {
+        key: "node",
+        label: "Node",
+        selected: false,
+        sortNum: 5,
+      },
     ],
     resultRepositories: [],
     bookmarkedRepos: [],
+    userData: null,
   },
   getters: {
     getCurrentLoadingButton(state) {
@@ -29,8 +55,14 @@ const myModule = {
     getBookmarkedRepositories(state) {
       return state.bookmarkedRepos;
     },
+    getUserData(state) {
+      return state.userData;
+    },
   },
   mutations: {
+    updateUserData(state, data) {
+      state.userData = data;
+    },
     updateCurrentLoadingButton(state, buttonId) {
       state.currentLoadingButton = buttonId;
     },
@@ -69,7 +101,6 @@ const myModule = {
     },
     fetchGithubReposForTopic({ commit, state }, payload) {
       const urlToFetch = api.getDataSourceUrl(payload.language, payload.sort);
-      console.log("urlToFetch", urlToFetch);
       const language = payload.language;
       api
         .get(urlToFetch)
@@ -91,12 +122,14 @@ const myModule = {
           });
           if (keyExistInResult > -1) {
             newResult[keyExistInResult]["items"] = dataItemsToUse;
+            newResult[keyExistInResult]["sortBy"] = payload.sort;
           } else {
             newResult.push({
               key: language,
               label: toggleTopics.find((i) => i.key === language).label,
               sortNum: toggleTopics.find((i) => i.key === language).sortNum,
               items: dataItemsToUse,
+              sortBy: payload.sort,
             });
           }
           const sortedResult = newResult.sort((a, b) => a.sortNum - b.sortNum);
@@ -105,6 +138,7 @@ const myModule = {
             ...item,
             selected: selectedTopics.includes(item.key),
           }));
+          console.log("updatedArray", sortedResult);
           commit("updateToggleTopics", updatedArray);
           commit("updateGithubRepoResults", sortedResult);
         })

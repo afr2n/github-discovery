@@ -1,22 +1,27 @@
 <!-- prettier-ignore -->
 
 <template>
-  <div class="items-list container-fluid">
-		<div class="flex row">
-			<h3 class="text-left ">{{ isBookmark ? title : "Top " + title }}</h3>
-			<div class="dropdown" v-if="!isBookmark" >
-				<button @click="toggleDropdown" class="dropdown-btn">
-					<span class="arrow " :class="{ 'up': isOpen, 'down': !isOpen }"></span>
-				</button>
-				<div v-if="isOpen" class="dropdown-content">
-					<ul>
-						<li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
-							{{ option.label }}
-						</li>
-					</ul>
-				</div>
-			</div>
-      <div class="card-list-container w-100">
+  <div class="items-list container-fluid pr-0">
+		<div class="flex">
+      <div class="flex row w-100 align-items-center justify-content-between">
+        <div class="flex row mx-0">
+          <h3 class="text-left ">{{ isBookmark ? title : "Top " + title }}</h3>
+          <div class="dropdown" v-if="!isBookmark" >
+            <button @click="toggleDropdown" class="dropdown-btn">
+              <span class="arrow " :class="{ 'up': isOpen, 'down': !isOpen }"></span>
+            </button>
+            <div v-if="isOpen" class="dropdown-content">
+              <ul>
+                <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
+                  {{ option.label }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <h4 v-if="!isBookmark" > sorted by {{sortBy}} </h4>
+      </div>
+      <div class="card-list-container">
         <CustomCard
           v-for="item in items"
           :key="item.id"
@@ -40,6 +45,10 @@ export default {
       required: false,
     },
     title: {
+      type: String,
+      required: false,
+    },
+    sortBy: {
       type: String,
       required: false,
     },
@@ -71,20 +80,10 @@ export default {
     selectOption(option) {
       this.selectedOption = option;
       this.isOpen = false;
-      console.log("option", option.value);
-      console.log("listKey", this.listKey);
       store.dispatch("fetchGithubReposForTopic", {
         language: this.listKey,
         sort: option.value,
       });
-    },
-    myChangeFunction(event) {
-      let value = event.target.value;
-      clearTimeout(this.time);
-      this.time = setTimeout(() => {
-        let searchValue = value.toLowerCase();
-        this.$emit("search-input-changed", searchValue);
-      }, 1500);
     },
   },
   computed: {
@@ -108,6 +107,8 @@ export default {
   overflow-x: auto;
   display: flex;
   white-space: nowrap;
+  margin-left: -15px;
+  width: 104% !important;
 }
 h3 {
   margin-top: 0;

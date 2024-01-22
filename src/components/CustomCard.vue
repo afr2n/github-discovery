@@ -6,21 +6,21 @@
       <div class="starContainer"> 
         <CustomButton
           :isDisabled="false"
-          :onButtonClick="uploadTranscriptions"
+          :onButtonClick="handleBookmarkClick"
           :isIcon="true"
           :isActive="isBookmarked || isFromBookmarkList"
           :activeIconUrl="require('@/assets-for-challenge/star-solid.svg')"
           :iconUrl="require('@/assets-for-challenge/star-regular.svg')"
         />
       </div>
-      <div>
+      <div class="text-left">
         <a class="text-black" :href="item.html_url" target="_blank" rel="noopener noreferrer">
         <span class="title ">{{item.name}}</span>
         </a> 
         <p>{{item.description}}</p>
       </div>
       <div>
-        <p class="lastUpdated">Last Updated: {{lastUpdatedDate}}</p>
+        <p class="lastUpdated text-right">Last Updated: {{lastUpdatedDate}}</p>
       </div>
     </div>
 	</div>
@@ -54,7 +54,7 @@ export default {
     this.isBookmarked = isBookmarked;
   },
   methods: {
-    uploadTranscriptions() {
+    handleBookmarkClick() {
       store.dispatch("handleBookmarkClick", { item: this.item });
     },
   },
@@ -100,6 +100,8 @@ export default {
   word-wrap: break-word;
   background-color: #f6f7f8;
   background-clip: border-box;
+  /* background: url("@/assets-for-challenge/repo.png") 0 0 no-repeat;
+  background-size: 300px 150px; */
   -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
   -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
@@ -129,6 +131,9 @@ export default {
 .title {
   text-transform: capitalize;
   font-weight: bold;
+}
+.text-right {
+  text-align: right;
 }
 p {
   display: flex;

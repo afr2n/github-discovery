@@ -5,12 +5,12 @@
       <div class="col-5 mx-auto">
         <h2>Sign Up</h2>
         <form @submit.prevent="submitForm">
-            <div class="w-100">
-              <CustomInput label="Email" placeholder="Email" :name="email" id="email" required />
-              <CustomInput label="Password" placeholder="**********" type="password" :name="password" id="password" required />
-              <CustomInput label="Repeat Password" placeholder="**********" type="password" :name="repeatPassword" id="repeat-password" required />
-              <CustomButton extraClass="w-100 pt-4 px-0" buttonType='solid' buttonText="Sign Up" type="submit"/>
-            </div>
+          <div class="w-100">
+            <CustomInput label="Email" @input-changed="(val) => inputChanged(val, 'email')" placeholder="Email" v-model="email" type="email" id="email" required />
+            <CustomInput label="Password" @input-changed="(val) => inputChanged(val, 'password')"  placeholder="**********" type="password" v-model="password" id="password" required />
+            <CustomInput label="Repeat Password" @input-changed="(val) => inputChanged(val, 'repeatPassword')"  placeholder="**********" type="password" v-model="repeatPassword" id="repeatPassword" required />
+            <CustomButton extraClass="w-100 pt-4 px-0" buttonType="solid" buttonText="Sign Up" type="submit" />
+          </div>
         </form>
 
         <p>
@@ -24,20 +24,74 @@
 <script>
 import CustomInput from "@/components/CustomInput.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+import store from "../store";
+
+const redirectToLoginView = () => {
+  window.location.href = "/discovery";
+};
 
 export default {
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
+      repeatPassword: "",
     };
   },
   components: { CustomInput, CustomButton },
   methods: {
     submitForm() {
-      // Perform login logic here
-      console.log("Logging in with:", this.username, this.password);
-      // You can make an API call or any other logic for authentication
+      console.log(
+        "Logging in with:",
+        this.email,
+        this.password,
+        this.repeatPassword
+      );
+      if (this.password && this.password === this.repeatPassword) {
+        createUserWithEmailAndPassword(
+          getAuth(),
+          this.email,
+          this.password
+        ).then((data) => {
+          const userData = JSON.parse(JSON.stringify(data.user));
+          this.showSuccessToast("Successfully Registered!");
+          if (userData) {
+            userData["username"] = userData.email.split("@")[0];
+            store.commit("updateUserData", userData);
+            redirectToLoginView();
+          }
+        });
+      } else {
+        if (this.password.length < 8) {
+          this.showErrorToast("The password must be atleast 8 characters");
+        } else {
+          this.showErrorToast("Two passwords do not match");
+        }
+      }
+    },
+    inputChanged(val, variable) {
+      switch (variable) {
+        case "email":
+          this.email = val;
+          break;
+        case "password":
+          this.password = val;
+          break;
+        case "repeatPassword":
+          this.repeatPassword = val;
+          break;
+      }
+    },
+    showSuccessToast(message) {
+      const toast = useToast();
+      toast.success(message);
+    },
+    showErrorToast(message) {
+      const toast = useToast();
+      toast.error(message);
     },
   },
 };

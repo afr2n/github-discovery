@@ -9,7 +9,6 @@
     } ${extraClass} `"
     @click="onButtonClick"
   >
-    <!-- display loader if button triggeres fetch to backend -->
     <div v-if="!buttonLoading">
       <div
         v-if="isIcon"
@@ -93,7 +92,7 @@ export default {
 
 <style scoped>
 .cusBtn {
-  font-family: "OpenSans-Regular";
+  font-family: "Montserrat-Medium";
   font-size: 14px;
   font-weight: bold;
 }
@@ -103,8 +102,8 @@ export default {
 }
 .secondary-button {
   border: 1px solid #111;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   border-radius: 15px;

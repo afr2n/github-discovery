@@ -7,7 +7,6 @@
           <router-link to="/discovery">
             <CustomButton
               :isDisabled="false"
-              :onButtonClick="uploadTranscriptions"
               :isIcon="false"
               :isActive="$route.path === '/discovery'"
               buttonText="Discovery"
@@ -19,20 +18,17 @@
           <router-link to="/account">
             <CustomButton
               :isDisabled="false"
-              :onButtonClick="uploadTranscriptions"
               :isIcon="false"
               :isActive="$route.path === '/account'"
-              buttonText="Username"
+              :buttonText="username"
             />
           </router-link>
-          <router-link to="/login">
-            <CustomButton
-              :isDisabled="false"
-              :onButtonClick="uploadTranscriptions"
-              :isIcon="false"
-              buttonText="Logout"
-            />
-          </router-link>
+          <CustomButton
+            :isDisabled="false"
+            :isIcon="false"
+            :onButtonClick="logoutUser"
+            buttonText="Logout"
+          />
         </div>
       </div>
     </div>
@@ -41,24 +37,41 @@
 
 <script>
 import CustomButton from "@/components/CustomButton.vue";
-import store from "../store";
+import { getAuth, signOut } from "firebase/auth";
 import { mapGetters } from "vuex";
 
 export default {
-  methods: {
-    uploadTranscriptions() {
-      store.commit("updateCurrentLoadingButton", "post-transcriptions");
-      store.dispatch("postTranscriptionsAction");
-    },
-    loadTranscriptions() {
-      store.commit("updateCurrentLoadingButton", "fetch-transcriptions");
-      store.dispatch("fetchTranscriptionsAction");
-    },
+  data() {
+    return {
+      username: "",
+    };
+  },
+  created() {
+    this.updateUsername();
+  },
+  watch: {
+    userData: "updateUsername",
   },
   computed: {
     ...mapGetters({
-      currentLoadingButton: "getCurrentLoadingButton",
+      userData: "getUserData",
     }),
+  },
+  methods: {
+    updateUsername() {
+      const userDataObj = JSON.parse(JSON.stringify(this.userData));
+      if (userDataObj.username) {
+        this.username = userDataObj.username;
+      } else {
+        this.username = "";
+      }
+    },
+    logoutUser() {
+      console.log("logoutUser");
+      signOut(getAuth()).then(() => {
+        window.location.href = "/login";
+      });
+    },
   },
   components: {
     CustomButton,
@@ -66,7 +79,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   font-family: "Montserrat-Medium";

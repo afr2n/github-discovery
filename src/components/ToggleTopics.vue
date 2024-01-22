@@ -24,14 +24,6 @@ import store from "../store";
 
 export default {
   methods: {
-    myChangeFunction(event) {
-      let value = event.target.value;
-      clearTimeout(this.time);
-      this.time = setTimeout(() => {
-        let searchValue = value.toLowerCase();
-        this.$emit("search-input-changed", searchValue);
-      }, 1500);
-    },
     loadGithubRepos(topic) {
       const currentTopics = JSON.parse(JSON.stringify(this.toggleTopics));
       if (currentTopics.find((i) => i.key === topic && i.selected)) {

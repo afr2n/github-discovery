@@ -9,12 +9,12 @@
       <div class="col-12 input-container">
 				<input
 				:type="type"
-				:id="name"
+				:id="id"
 				:name="name"
 				:placeholder="placeholder"
-				:value="value"
 				:required="required"
-				@input="$emit('input', $event.target.value)"
+        :value="modelValue"
+				@input="handleInput" 
 				@blur="$emit('blur', $event)"
 				class="w-100 customInput"
 				/>
@@ -32,6 +32,10 @@ export default {
       required: true,
     },
     label: {
+      type: String,
+      required: true,
+    },
+    modelValue: {
       type: String,
       required: true,
     },
@@ -54,6 +58,12 @@ export default {
     error: {
       type: String,
       default: "",
+    },
+  },
+  methods: {
+    handleInput(e) {
+      let value = e.target.value;
+      this.$emit("input-changed", value);
     },
   },
 };

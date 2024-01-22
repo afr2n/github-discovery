@@ -52,8 +52,8 @@ p {
 }
 
 .custom-container-width {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
   max-width: 95%;
   @include respond-below(lg) {
     max-width: 95%;
