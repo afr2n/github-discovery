@@ -29,7 +29,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import store from "../store";
 
 const redirectToLoginView = () => {
-  window.location.href = "/discovery";
+  window.history.pushState(null, null, "/discovery");
 };
 
 export default {
