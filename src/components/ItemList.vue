@@ -1,7 +1,7 @@
 <!-- prettier-ignore -->
 
 <template>
-  <div class="items-list container-fluid pr-0">
+  <div class="items-list container-fluid pr-0" :id="`list-for-${listKey??'bookmarks'}`">
 		<div class="flex">
       <div class="flex row w-100 align-items-center justify-content-between">
         <div class="flex row mx-0">
@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-        <h4 v-if="!isBookmark" > sorted by {{sortBy}} </h4>
+        <h4 v-if="!isBookmark && sortBy" > sorted by {{sortBy}} </h4>
       </div>
       <div class="card-list-container">
         <CustomCard

@@ -3,12 +3,12 @@
   <div class="container d-flex justify-content-center align-items-center">
 		<div class="row w-100">
             <div class="col-5 px-0">
-                <h2 class="text-left">My Account</h2>
+                <h3 class="text-left">My Account</h3>
                 <form @submit.prevent="submitForm">
                     <div class="w-100">
                         <CustomInput label="Username" @input-changed="(val) => inputChanged(val, 'username')" placeholder="Username" :modelValue="username" v-model="username" type="text" id="username" required />    
                         <CustomInput label="Email" @input-changed="(val) => inputChanged(val, 'email')" placeholder="Email" v-model="email" type="email" id="email" required />                        <div class="row mx-0">
-                            <CustomButton extraClass="pt-4 px-0" buttonType='solid' buttonText="Save" type="submit"/>
+                            <CustomButton id="saveUserData" extraClass="pt-4 px-0" buttonType='solid' buttonText="Save" type="submit"/>
                         </div>
                     </div>
                 </form>
