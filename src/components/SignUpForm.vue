@@ -14,7 +14,7 @@
         </form>
 
         <p>
-          Have an account already? <router-link class="text-black" to="/login">Login</router-link>
+          Have an account already? <router-link class="text-black" to="/login">Sign In</router-link>
         </p>
       </div>
 		</div>
@@ -30,7 +30,9 @@ import "vue-toast-notification/dist/theme-sugar.css";
 import store from "../store";
 
 const redirectToLoginView = () => {
-  window.location.href = "/discovery";
+  setTimeout(() => {
+    window.history.pushState(null, null, "/discovery");
+  }, 3000);
 };
 
 export default {
