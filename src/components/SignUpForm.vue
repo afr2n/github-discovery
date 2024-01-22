@@ -29,12 +29,6 @@ import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 import store from "../store";
 
-const redirectToLoginView = () => {
-  setTimeout(() => {
-    window.history.pushState(null, null, "/discovery");
-  }, 3000);
-};
-
 export default {
   data() {
     return {
@@ -57,7 +51,7 @@ export default {
           if (userData) {
             userData["username"] = userData.email.split("@")[0];
             store.commit("updateUserData", userData);
-            redirectToLoginView();
+            this.$router.push("/discovery");
           }
         });
       } else {
