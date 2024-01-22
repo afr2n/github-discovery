@@ -4,7 +4,7 @@ import LoginView from "../views/login.vue";
 import SignupView from "../views/signup.vue";
 import MyAccountView from "../views/Account.vue";
 import Discovery from "../views/Discovery.vue";
-
+import { getAuth } from "firebase/auth";
 const routes = [
   {
     path: "/",
@@ -25,11 +25,17 @@ const routes = [
     path: "/account",
     name: "account",
     component: MyAccountView,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/discovery",
     name: "discovery",
     component: Discovery,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
@@ -38,4 +44,15 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (getAuth().currentUser) {
+      next();
+    } else {
+      next("/login");
+    }
+  } else {
+    next();
+  }
+});
 export default router;
