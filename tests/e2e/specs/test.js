@@ -37,7 +37,7 @@ describe("Sign Up Page", () => {
     cy.get('#password').find("input").type("123Abc123");
     cy.get('#repeatPassword').find("input").type("123Abc123");
     cy.get('button').click();
-    cy.wait(DEFAULT_WAIT_TIME*6);
+    cy.wait(DEFAULT_WAIT_TIME*3);
     cy.url().should('include', '/discovery');
     cy.wait(DEFAULT_WAIT_TIME);
     cy.get('#logout').click();

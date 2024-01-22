@@ -71,7 +71,7 @@ export default {
     },
     logoutUser() {
       signOut(getAuth()).then(() => {
-        window.location.href = "/login";
+        this.$router.push("/login");
       });
     },
   },
