@@ -7,7 +7,7 @@
         :key="item.key"
         :id="item.key"
         :isDisabled="false"
-        :onButtonClick="() => loadGithubRepos(item.key)"
+        @button-clicked="() => loadGithubRepos(item.key)"
         :isIcon="false"
         buttonType="secondary"
         :isActive="item.selected"

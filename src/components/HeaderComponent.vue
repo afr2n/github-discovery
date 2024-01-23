@@ -28,7 +28,7 @@
           <CustomButton
             :isDisabled="false"
             :isIcon="false"
-            :onButtonClick="logoutUser"
+            @button-clicked="logoutUser"
             buttonText="Logout"
             id="logout"
           />
