@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import LoginForm from "@/components/LoginForm.vue";
+import LoginForm from "@/forms/LoginForm.vue";
 
 export default {
   name: "LoginView",

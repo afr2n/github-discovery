@@ -46,7 +46,6 @@ export default {
             if (userData) {
               userData["username"] = userData.email.split("@")[0];
               store.commit("updateUserData", userData);
-              console.log("this.$router", this.$router);
               this.$router.push("/discovery");
             }
           })

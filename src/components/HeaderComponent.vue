@@ -28,7 +28,7 @@
           <CustomButton
             :isDisabled="false"
             :isIcon="false"
-            :onButtonClick="logoutUser"
+            @button-clicked="logoutUser"
             buttonText="Logout"
             id="logout"
           />
@@ -71,7 +71,7 @@ export default {
     },
     logoutUser() {
       signOut(getAuth()).then(() => {
-        window.location.href = "/login";
+        this.$router.push("/login");
       });
     },
   },

@@ -6,7 +6,7 @@
       <div class="starContainer"> 
         <CustomButton
           :isDisabled="false"
-          :onButtonClick="handleBookmarkClick"
+          @button-clicked="handleBookmarkClick"
           :isIcon="true"
           :isActive="isBookmarked || isFromBookmarkList"
           :activeIconUrl="require('@/assets-for-challenge/star-solid.svg')"

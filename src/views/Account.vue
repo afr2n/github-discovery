@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import MyAccountForm from "@/components/MyAccountForm.vue";
+import MyAccountForm from "@/forms/MyAccountForm.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 
 export default {

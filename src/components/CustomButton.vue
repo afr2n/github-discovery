@@ -63,10 +63,6 @@ export default {
       required: true,
       default: "primary",
     },
-    onButtonClick: {
-      tyle: Function,
-      required: true,
-    },
     buttonLoading: {
       type: Boolean,
       required: false,
@@ -90,6 +86,11 @@ export default {
     isIcon: {
       type: Boolean,
       required: false,
+    },
+  },
+  methods: {
+    onButtonClick() {
+      this.$emit("button-clicked");
     },
   },
 };

@@ -12,14 +12,14 @@
             </button>
             <div v-if="isOpen" class="dropdown-content">
               <ul>
-                <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
-                  {{ option.label }}
+                <li v-for="(option) in options" :class="sortBy === option.value? 'active-option' :''" :id="`option-${listKey}-${option.value}`" :key="option.value" @click="selectOption(option)">
+                  Sort By {{ option.label }}
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <h4 v-if="!isBookmark && sortBy" > sorted by {{sortBy}} </h4>
+        <h4 v-if="!isBookmark && sortBy" class="my-0" >Sorted by {{options.find((i) => i.value === sortBy)?.label}} </h4>
       </div>
       <div class="card-list-container">
         <CustomCard
@@ -66,10 +66,10 @@ export default {
       isOpen: false,
       selectedOption: "",
       options: [
-        { label: "Sort by stars", value: "stars" },
-        { label: "Sort by forks", value: "forks" },
-        { label: "Sort by help wanted issues", value: "help-wanted-issues" },
-        { label: "Sory by updated", value: "updated" },
+        { label: "Stars", value: "stars" },
+        { label: "Forks", value: "forks" },
+        { label: "Help wanted issues", value: "help-wanted-issues" },
+        { label: "By updated", value: "updated" },
       ],
     };
   },
@@ -148,7 +148,9 @@ h3 {
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.active-option {
+  background: #f2f2f2;
+}
 ul {
   list-style-type: none;
   padding: 0;

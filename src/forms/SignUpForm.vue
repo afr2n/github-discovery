@@ -40,7 +40,11 @@ export default {
   components: { CustomInput, CustomButton },
   methods: {
     submitForm() {
-      if (this.password && this.password === this.repeatPassword) {
+      if (
+        this.password &&
+        this.password === this.repeatPassword &&
+        this.password.length > 7
+      ) {
         createUserWithEmailAndPassword(
           getAuth(),
           this.email,

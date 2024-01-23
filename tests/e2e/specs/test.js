@@ -26,6 +26,28 @@ describe("Login Validation", () => {
   });
 });
 
+describe("Signup Validation", () => {
+  it("Error on Wrong Signup with wrong data", () => {
+    cy.wait(DEFAULT_WAIT_TIME);
+    cy.visit("/signup");
+    cy.contains("h2", "Sign Up");
+    cy.get('#email').find("input").type(`tab@gmail.com`);
+    cy.get('#password').find("input").type("123");
+    cy.get('#repeatPassword').find("input").type("123");
+    cy.get('button').click();
+    cy.wait(500);
+    cy.get('.v-toast--top', { force: true }).scrollIntoView().should('have.length', 1);
+    cy.get('.v-toast').invoke('text').should('include', 'The password must be atleast 8 characters');
+    cy.wait(DEFAULT_WAIT_TIME);
+    cy.get('#password').find("input").type("123Abc123");
+    cy.get('#repeatPassword').find("input").type("123Abcd123");
+    cy.get('button').click();
+    cy.wait(500);
+    cy.get('.v-toast').invoke('text').should('include', 'Two passwords do not match');
+    cy.url().should('include', '/signup');
+  });
+});
+
 
 describe("Sign Up Page", () => {
   it("Visits the Sign up url", () => {
@@ -37,7 +59,7 @@ describe("Sign Up Page", () => {
     cy.get('#password').find("input").type("123Abc123");
     cy.get('#repeatPassword').find("input").type("123Abc123");
     cy.get('button').click();
-    cy.wait(DEFAULT_WAIT_TIME*6);
+    cy.wait(DEFAULT_WAIT_TIME*3);
     cy.url().should('include', '/discovery');
     cy.wait(DEFAULT_WAIT_TIME);
     cy.get('#logout').click();
